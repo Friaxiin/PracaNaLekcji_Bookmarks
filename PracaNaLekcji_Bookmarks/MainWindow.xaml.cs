@@ -19,6 +19,16 @@ namespace PracaNaLekcji_Bookmarks
         public MainWindow()
         {
             InitializeComponent();
+            List<Book> books = Database.LoadBooks();
+
+            bookList.ItemsSource = books;
+        }
+
+        private void AddBook(object sender, RoutedEventArgs e)
+        {
+            Window window = new AddBookWindow();
+            window.Show();
+            this.Close();
         }
     }
 }

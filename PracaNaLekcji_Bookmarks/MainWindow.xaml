@@ -7,6 +7,29 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <StackPanel>
+        <Button Content="Dodaj książkę" Click="AddBook"/>
 
+        <ListView x:Name="bookList">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Tytuł:"/>
+                            <TextBlock x:Name="tytulTxt"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Opis:"/>
+                            <TextBlock x:Name="opisTxt"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Autor"/>
+                            <TextBlock x:Name="autorTxt"/>
+                        </StackPanel>
+                        <Button Content="Usuń"/>
+                        <Button Content="Zakładki"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </StackPanel>
 </Window>

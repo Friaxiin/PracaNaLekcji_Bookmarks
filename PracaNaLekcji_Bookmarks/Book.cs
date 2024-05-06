@@ -15,14 +15,16 @@ namespace PracaNaLekcji_Bookmarks
         public string Description { get; set; }
         public string Author { get; set; }
         public DateTime PublishedOn { get; set; }
+        private int LastId { get; set; }
 
-        public Book(string title, string description, string author, DateTime publishedOn)
+        public Book(string title, string description, string author)
         {
+            Id = IdInc(Id);
             Bookmarks = new ObservableCollection<Bookmark>();
             Title = title;
             Description = description;
             Author = author;
-            PublishedOn = publishedOn;
+            //PublishedOn = publishedOn;
         }
 
         public void AddBookmark(Bookmark bookmark)
@@ -34,6 +36,12 @@ namespace PracaNaLekcji_Bookmarks
         {
             Bookmarks.Remove(bookmark);
             //Save to file txt
+        }
+        public int IdInc(int id)
+        {
+            LastId = id;
+            id = LastId++;
+            return id;
         }
     }
 }
