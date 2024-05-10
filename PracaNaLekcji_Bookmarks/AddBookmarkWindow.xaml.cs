@@ -19,10 +19,12 @@ namespace PracaNaLekcji_Bookmarks
     /// </summary>
     public partial class AddBookmarkWindow : Window
     {
+        Book Book { get; set; }
         public AddBookmarkWindow(Book book)
         {
             InitializeComponent();
-            bookmarkList.ItemsSource = book.Bookmarks;
+            this.Book = book;
+            //bookmarkList.ItemsSource = book.Bookmarks;
         }
         private void bookmarkListDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -33,9 +35,9 @@ namespace PracaNaLekcji_Bookmarks
 
         private void AddBookmark(object sender, RoutedEventArgs e)
         {
-            Bookmark addedBookmark = new Bookmark(int.Parse(pageEntry.Text), descEntry.Text);
-            (DataContext as Book).AddBookmark(addedBookmark);
-            bookmarkList.ItemsSource = (DataContext as Book).Bookmarks;
+            Bookmark addedBookmark = new Bookmark(int.Parse(pageEntry.Text), descEntry.Text, this.Book.Id);
+            Database.AddBookmark(addedBookmark);
+            //bookmarkList.ItemsSource = (DataContext as Book).Bookmarks;
         }
     }
 }

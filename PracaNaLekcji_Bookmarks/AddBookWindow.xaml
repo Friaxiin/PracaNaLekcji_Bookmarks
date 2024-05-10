@@ -16,9 +16,6 @@
 
             <TextBlock Text="Autor"/>
             <TextBox x:Name="authorEntry" Margin="10" HorizontalAlignment="Left" Width="200"/>
-
-            <TextBlock Text="Data wydania"/>
-            <DatePicker x:Name="publishedEntry" Margin="10" HorizontalAlignment="Left" Width="200"/>
         </StackPanel>
 
         <Button Content="Dodaj" Click="AddBook" Background="AliceBlue" Width="200"/>
