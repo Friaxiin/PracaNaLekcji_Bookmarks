@@ -5,29 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PracaNaLekcji_Bookmarks"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <StackPanel>
-        <Button Content="Dodaj książkę" Click="AddBook"/>
-
-        <ListView x:Name="bookList">
+        Title="MainWindow" Height="450" Width="700">
+    <StackPanel Background="LightBlue">
+        <Button Content="Dodaj Ksiażkę" Click="AddBook" Margin="10" Width="200" Background="AliceBlue"/>
+        <ListView x:Name="bookList" Background="White">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Tytuł:"/>
-                            <TextBlock x:Name="tytulTxt"/>
+                    <WrapPanel>
+                        <StackPanel Margin="5">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Tytul:"/>
+                                <Label Content="{Binding Title}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Opis:"/>
+                                <Label Content="{Binding Description}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Autor:"/>
+                                <Label Content="{Binding Author}"/>
+                            </StackPanel>
+                            <Button Content="Usuń" Click="DeleteBook" CommandParameter="{Binding}"/>
+                            <Button Content="Zakładki" Click="Bookmarks" CommandParameter="{Binding}"/>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Opis:"/>
-                            <TextBlock x:Name="opisTxt"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Autor"/>
-                            <TextBlock x:Name="autorTxt"/>
-                        </StackPanel>
-                        <Button Content="Usuń"/>
-                        <Button Content="Zakładki"/>
-                    </StackPanel>
+                    </WrapPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

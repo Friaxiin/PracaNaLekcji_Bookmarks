@@ -10,22 +10,7 @@ namespace PracaNaLekcji_Bookmarks
     /// </summary>
     public partial class App : Application
     {
-        public static string DbBooksPath
-        {
-            get
-            {
-                string PathBooks = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Books.txt");
-                return PathBooks;
-            }
-        }
-        public static string DbBookmarksPath
-        {
-            get
-            {
-                string PathBookmarks = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Bookmarks.txt");
-                return PathBookmarks;
-            }
-        }
+       
     }
 
 }

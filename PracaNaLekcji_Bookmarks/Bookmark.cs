@@ -8,9 +8,13 @@ namespace PracaNaLekcji_Bookmarks
 {
     public class Bookmark
     {
-        public int Id { get; set; }
-        public int Page {  get; set; }
-        public string? Description { get; set; }
-        public int BookId { get; set; }
+        public int PageNumber { get; set; }
+        public string Description { get; set; }
+
+        public Bookmark(int pageNumber, string description)
+        {
+            PageNumber = pageNumber;
+            Description = description;
+        }
     }
 }

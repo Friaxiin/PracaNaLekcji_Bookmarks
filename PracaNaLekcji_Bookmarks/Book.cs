@@ -9,39 +9,25 @@ namespace PracaNaLekcji_Bookmarks
 {
     public class Book
     {
-        public ObservableCollection<Bookmark> Bookmarks { get; set; }
-        public int Id { get; set; }
+        public ObservableCollection<Bookmark> Bookmarks { get; private set; }
         public string Title { get; set; }
-        public string Description { get; set; }
         public string Author { get; set; }
+        public string Description { get; set; }
         public DateTime PublishedOn { get; set; }
-        private int LastId { get; set; }
 
-        public Book(string title, string description, string author)
+        public Book(string title, string author, string description, DateTime date)
         {
-            Id = IdInc(Id);
             Bookmarks = new ObservableCollection<Bookmark>();
             Title = title;
-            Description = description;
             Author = author;
-            //PublishedOn = publishedOn;
+            Description = description;
+            PublishedOn = date;
         }
 
         public void AddBookmark(Bookmark bookmark)
         {
             Bookmarks.Add(bookmark);
-            //Save to file txt
-        }
-        public void RemoveBookmark(Bookmark bookmark)
-        {
-            Bookmarks.Remove(bookmark);
-            //Save to file txt
-        }
-        public int IdInc(int id)
-        {
-            LastId = id;
-            id = LastId++;
-            return id;
+            Database.SaveDataBaseToJsonFile();
         }
     }
 }

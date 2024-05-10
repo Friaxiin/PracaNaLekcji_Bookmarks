@@ -5,20 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PracaNaLekcji_Bookmarks"
         mc:Ignorable="d"
-        Title="AddBookWindow" Height="450" Width="800">
-    <StackPanel>
-        <TextBlock Text="Tytuł"/>
-        <TextBox x:Name="titleEntry"/>
+        Title="AddBookWindow" Height="350" Width="400">
+    <StackPanel Background="LightBlue">
+        <StackPanel Margin="10">
+            <TextBlock Text="Tytuł"/>
+            <TextBox x:Name="titleEntry" Margin="10" HorizontalAlignment="Left" Width="200"/>
 
-        <TextBlock Text="Opis"/>
-        <TextBox x:Name="descEntry"/>
-        
-        <TextBlock Text="Autor"/>
-        <TextBox x:Name="authorEntry"/>
+            <TextBlock Text="Opis"/>
+            <TextBox x:Name="descEntry" Margin="10" HorizontalAlignment="Left" Width="200"/>
 
-        <TextBlock Text="Data wydania"/>
-        <DatePicker x:Name="publishedEntry"/>
+            <TextBlock Text="Autor"/>
+            <TextBox x:Name="authorEntry" Margin="10" HorizontalAlignment="Left" Width="200"/>
 
-        <Button Content="Dodaj" Click="AddBook"/>
+            <TextBlock Text="Data wydania"/>
+            <DatePicker x:Name="publishedEntry" Margin="10" HorizontalAlignment="Left" Width="200"/>
+        </StackPanel>
+
+        <Button Content="Dodaj" Click="AddBook" Background="AliceBlue" Width="200"/>
     </StackPanel>
 </Window>

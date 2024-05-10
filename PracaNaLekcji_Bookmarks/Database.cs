@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -9,41 +11,63 @@ namespace PracaNaLekcji_Bookmarks
 {
     public static class Database
     {
-        static string BooksPath = App.DbBooksPath;
-        static string BookmarksPath = App.DbBookmarksPath;
+        private static readonly string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\Books", "books.json");
 
-        public static void WriteBooksToFile(List<Book> books)
+        public static ObservableCollection<Book> Books { get; private set; }
+
+        static Database()
         {
-            List<string> output = new List<string>();
-            foreach (Book book in books) 
+            if (Books == null)
             {
-                string line = $"{book.Id};{book.Title};{book.Description};{book.Author}";
-                output.Add(line);
+                ReadDataBaseFromJsonFile();
             }
-            File.WriteAllLines(BooksPath, output);
         }
-        public static List<Book> LoadBooks()
+
+        public static void AddBook(Book book)
         {
-            if(File.Exists(BooksPath))
+            Books.Add(book);
+            SaveDataBaseToJsonFile();
+        }
+
+        public static void RemoveBook(Book book)
+        {
+            Books.Remove(book);
+            SaveDataBaseToJsonFile();
+        }
+
+        public static void SaveDataBaseToJsonFile()
+        {
+            if (File.Exists(dbPath))
             {
-                List<string> result = File.ReadAllLines(BooksPath).ToList();
-                List<Book> books = new List<Book>();
-
-                foreach(var line in result)
-                {
-                    string[] entries = line.Split(';');
-
-                    if (entries.Length > 1)
-                    {
-                        Book book = new Book(entries[1], entries[2], entries[3]);
-                        books.Add(book);
-                    }
-                }
-                return books;
+                string serializedDatabase = JsonConvert.SerializeObject(Books);
+                File.Delete(dbPath);
+                File.WriteAllText(dbPath, serializedDatabase);
             }
             else
             {
-                return new List<Book>();
+                Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\Books"));
+
+                string serializedDatabase = JsonConvert.SerializeObject(new List<Book>());
+                File.WriteAllText(dbPath, serializedDatabase);
+            }
+        }
+
+        private static void ReadDataBaseFromJsonFile()
+        {
+            if (File.Exists(dbPath))
+            {
+                string serializedDatabase = File.ReadAllText(dbPath);
+
+                Books = JsonConvert.DeserializeObject<ObservableCollection<Book>>(serializedDatabase);
+            }
+            else
+            {
+                Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\Books"));
+
+                string serializedDatabase = JsonConvert.SerializeObject(new ObservableCollection<Book>());
+                File.WriteAllText(dbPath, serializedDatabase);
+
+                Books = new ObservableCollection<Book>();
             }
         }
     }

@@ -20,21 +20,14 @@ namespace PracaNaLekcji_Bookmarks
     /// </summary>
     public partial class AddBookWindow : Window
     {
-        string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Books.txt");
-        List<Book> books = Database.LoadBooks();
         public AddBookWindow()
         {
             InitializeComponent();
         }
-
         private void AddBook(object sender, RoutedEventArgs e)
         {
-            Book book = new Book(titleEntry.Text, descEntry.Text, authorEntry.Text);
-            books.Add(book);
-            Database.WriteBooksToFile(books);
-
-            Window window = new MainWindow();
-            window.Show();
+            Book newbook = new Book(titleEntry.Text, authorEntry.Text, descEntry.Text, publishedEntry.DisplayDate);
+            Database.AddBook(newbook);
             this.Close();
         }
     }

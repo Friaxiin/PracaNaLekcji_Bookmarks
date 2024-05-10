@@ -19,16 +19,29 @@ namespace PracaNaLekcji_Bookmarks
         public MainWindow()
         {
             InitializeComponent();
-            List<Book> books = Database.LoadBooks();
-
-            bookList.ItemsSource = books;
+            bookList.ItemsSource = Database.Books;
         }
 
+        private void DeleteBook(object sender, RoutedEventArgs e)
+        {
+            Book selectedbook = (sender as Button).CommandParameter as Book;
+            Database.RemoveBook(selectedbook);
+            bookList.ItemsSource = Database.Books;
+        }
+
+        private void Bookmarks(object sender, RoutedEventArgs e)
+        {
+            Book selectedbook = (sender as Button).CommandParameter as Book;
+
+            AddBookmarkWindow bookmarks = new AddBookmarkWindow(selectedbook);
+            bookmarks.DataContext = selectedbook;
+            bookmarks.ShowDialog();
+
+        }
         private void AddBook(object sender, RoutedEventArgs e)
         {
-            Window window = new AddBookWindow();
-            window.Show();
-            this.Close();
+            new AddBookWindow().ShowDialog();
+            bookList.ItemsSource = Database.Books;
         }
     }
 }
