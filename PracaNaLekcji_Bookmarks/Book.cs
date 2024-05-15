@@ -14,14 +14,16 @@ namespace PracaNaLekcji_Bookmarks
         public string Title { get; set; }
         public string Author { get; set; }
         public string Description { get; set; }
-        public int LastId { get; set; }
+        public static int LastId { get; set; }
 
         public Book(string title, string author, string description)
         {
             //Bookmarks = new ObservableCollection<Bookmark>();
+            Id = LastId;
             Title = title;
             Author = author;
             Description = description;
+            LastId++;
         }
     }
 }

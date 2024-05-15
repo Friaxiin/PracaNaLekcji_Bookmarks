@@ -14,8 +14,7 @@ namespace PracaNaLekcji_Bookmarks
         private static readonly string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\Books", "books.txt");
         private static readonly string dbPathB = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\Books", "bookmarks.txt");
 
-        public static ObservableCollection<Book> Books { get; private set; }
-        public static ObservableCollection<Bookmark> Bookmarks { get; private set; }
+        public static ObservableCollection<Book> Books;
 
         static Database()
         {
@@ -23,10 +22,6 @@ namespace PracaNaLekcji_Bookmarks
             {
                 //ReadDataBaseFromJsonFile();
                 Books = ReadDataFromTxt();
-            }
-            if (Bookmarks == null)
-            {
-                Bookmarks = ReadBookmarksFromTxt();
             }
         }
 
@@ -118,20 +113,16 @@ namespace PracaNaLekcji_Bookmarks
         }
         public static void AddBookmark(Bookmark bookmark)
         {
-            Bookmarks.Add(bookmark);
             if (File.Exists(dbPath))
             {
                 List<string> output = new List<string>();
-                foreach (Bookmark bookmark1 in Bookmarks )
-                {
-                    string line = $"{bookmark1.PageNumber};{bookmark1.Description};{bookmark1.BookId}";
+                    string line = $"{bookmark.PageNumber};{bookmark.Description};{bookmark.BookId}";
                     output.Add(line);
-                }
 
-                File.WriteAllLines(dbPathB, output);
+                File.AppendAllLines(dbPathB, output);
             }
         }
-        public static ObservableCollection<Bookmark> ReadBookmarksFromTxt()
+        public static ObservableCollection<Bookmark> ReadBookmarksFromTxt(int bookId)
         {
             if (File.Exists(dbPath))
             {
@@ -141,9 +132,9 @@ namespace PracaNaLekcji_Bookmarks
                 foreach (string line in bookmarks)
                 {
                     string[] entries = line.Split(';');
-                    if (entries.Length > 0)
+                    if (entries.Length > 0 && int.Parse(entries[2]) == bookId)
                     {
-                        Bookmark bookmark = new Bookmark(entries[0], entries[1], entries[2]);
+                        Bookmark bookmark = new Bookmark(int.Parse(entries[0]), entries[1], int.Parse(entries[2]));
                         result.Add(bookmark);
                     }
                 }
@@ -151,7 +142,7 @@ namespace PracaNaLekcji_Bookmarks
             }
             else
             {
-                return new ObservableCollection<Book>();
+                return new ObservableCollection<Bookmark>();
             }
         }
     }

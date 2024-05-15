@@ -24,7 +24,7 @@ namespace PracaNaLekcji_Bookmarks
         {
             InitializeComponent();
             this.Book = book;
-            //bookmarkList.ItemsSource = book.Bookmarks;
+            bookmarkList.ItemsSource = Database.ReadBookmarksFromTxt(this.Book.Id);
         }
         private void bookmarkListDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -37,7 +37,7 @@ namespace PracaNaLekcji_Bookmarks
         {
             Bookmark addedBookmark = new Bookmark(int.Parse(pageEntry.Text), descEntry.Text, this.Book.Id);
             Database.AddBookmark(addedBookmark);
-            //bookmarkList.ItemsSource = (DataContext as Book).Bookmarks;
+            bookmarkList.ItemsSource = Database.ReadBookmarksFromTxt(this.Book.Id);
         }
     }
 }
