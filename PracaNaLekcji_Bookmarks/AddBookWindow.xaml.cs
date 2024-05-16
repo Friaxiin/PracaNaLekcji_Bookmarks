@@ -26,7 +26,7 @@ namespace PracaNaLekcji_Bookmarks
         }
         private void AddBook(object sender, RoutedEventArgs e)
         {
-            Book newbook = new Book(titleEntry.Text, authorEntry.Text, descEntry.Text, publishedEntry.DisplayDate);
+            Book newbook = new Book(titleEntry.Text, authorEntry.Text, descEntry.Text);
             Database.AddBook(newbook);
             this.Close();
         }

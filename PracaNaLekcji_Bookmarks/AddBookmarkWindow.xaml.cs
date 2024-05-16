@@ -22,7 +22,7 @@ namespace PracaNaLekcji_Bookmarks
         public AddBookmarkWindow(Book book)
         {
             InitializeComponent();
-            bookmarkList.ItemsSource = book.Bookmarks;
+            //bookmarkList.ItemsSource = book.Bookmarks;
         }
         private void bookmarkListDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -33,9 +33,9 @@ namespace PracaNaLekcji_Bookmarks
 
         private void AddBookmark(object sender, RoutedEventArgs e)
         {
-            Bookmark addedBookmark = new Bookmark(int.Parse(pageEntry.Text), descEntry.Text);
-            (DataContext as Book).AddBookmark(addedBookmark);
-            bookmarkList.ItemsSource = (DataContext as Book).Bookmarks;
+            //Bookmark addedBookmark = new Bookmark(int.Parse(pageEntry.Text), descEntry.Text);
+            //(DataContext as Book).AddBookmark(addedBookmark);
+            //bookmarkList.ItemsSource = (DataContext as Book).Bookmarks;
         }
     }
 }

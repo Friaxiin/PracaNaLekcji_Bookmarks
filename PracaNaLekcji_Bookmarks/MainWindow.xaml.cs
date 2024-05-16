@@ -19,14 +19,16 @@ namespace PracaNaLekcji_Bookmarks
         public MainWindow()
         {
             InitializeComponent();
-            bookList.ItemsSource = Database.Books;
+            //bookList.ItemsSource = Database.Books;
+            Database.CreateTables();
+            bookList.ItemsSource = Database.ReadBooks();
         }
 
         private void DeleteBook(object sender, RoutedEventArgs e)
         {
             Book selectedbook = (sender as Button).CommandParameter as Book;
-            Database.RemoveBook(selectedbook);
-            bookList.ItemsSource = Database.Books;
+            Database.DeleteBook(selectedbook);
+            bookList.ItemsSource = Database.ReadBooks();
         }
 
         private void Bookmarks(object sender, RoutedEventArgs e)
@@ -41,7 +43,7 @@ namespace PracaNaLekcji_Bookmarks
         private void AddBook(object sender, RoutedEventArgs e)
         {
             new AddBookWindow().ShowDialog();
-            bookList.ItemsSource = Database.Books;
+            bookList.ItemsSource = Database.ReadBooks();
         }
     }
 }
